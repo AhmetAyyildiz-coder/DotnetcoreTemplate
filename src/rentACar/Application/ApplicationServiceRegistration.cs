@@ -69,12 +69,9 @@ public static class ApplicationServiceRegistration
         return services;
     }
 
-    public static IServiceCollection AddSubClassesOfType(
-        this IServiceCollection services,
-        Assembly assembly,
-        Type type,
-        Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null
-    )
+    public static IServiceCollection AddSubClassesOfType(this IServiceCollection services, Assembly assembly, Type type,
+                                                         Func<IServiceCollection, Type, IServiceCollection>?
+                                                             addWithLifeCycle = null)
     {
         var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
         foreach (var item in types)
